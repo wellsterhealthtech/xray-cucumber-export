@@ -22,7 +22,7 @@ runs:
       id: xray-token
       shell: bash
       run: |
-        echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\":\"${{ inputs.client_id }}\",\"client_secret\":\"${{ inputs.client_secret }}\" }" https://xray.cloud.getxray.app/api/v1/authenticate | tr -d '"')
+        echo "{XRAY_TOKEN}={$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\":\"${{ inputs.client_id }}\",\"client_secret\":\"${{ inputs.client_secret }}\" }" https://xray.cloud.getxray.app/api/v1/authenticate | tr -d '"')}" >> $GITHUB_OUTPUT
   
     - name: Step2 - Get Feature Files(Test Cases) from Xray
       shell: bash
